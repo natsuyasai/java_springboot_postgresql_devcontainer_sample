@@ -1,6 +1,6 @@
 {
   "name": "java-api-server",
-  "dockerComposeFile": "../docker/docker-compose.yml",
+  "dockerComposeFile": "../docker/docker-compose.yaml",
   // dockercomposeのservice名
   "service": "java",
   // コンテナの作業ディレクトリ
