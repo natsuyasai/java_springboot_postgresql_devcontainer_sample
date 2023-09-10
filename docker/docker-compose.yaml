@@ -13,8 +13,9 @@ services:
         target: /app
     ports:
       - 8080:8080
-    depends_on:
-      - postgres # postgressql起動してから
+    depends_on: # 依存するコンテナ指定しそれが起動してから動作するようにする
+      - postgres
+      - redis
       
   postgres:
     build: ./database
@@ -27,4 +28,10 @@ services:
       - ./database/init:/docker-entrypoint-initdb.d #初期データの登録
     ports:
       - 5432:5432
+
+  redis:
+    image: redis:7.2.1
+    container_name: redis
+    ports:
+      - 6379:6379
 
