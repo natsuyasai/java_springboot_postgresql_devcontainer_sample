@@ -1,0 +1,30 @@
+version: '3'
+services:
+  java:
+    build: ./server
+    container_name: java
+    env_file:
+      - ./server/server.env
+    tty: true
+    working_dir: /app
+    volumes:
+      - type: bind # ホストのディレクトリをマウント
+        source: ../demo
+        target: /app
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres # postgressql起動してから
+      
+  postgres:
+    build: ./database
+    container_name: postgres
+    env_file:
+      - ./database/db.env
+    volumes:
+      - ./database/data:/var/lib/postgresql/data #実データの永読化
+      - ./database/log:/var/log/postgresql #logの永読化
+      - ./database/init:/docker-entrypoint-initdb.d #初期データの登録
+    ports:
+      - 5432:5432
+
