@@ -10,7 +10,7 @@ services:
     volumes:
       - type: bind # ホストのディレクトリをマウント
         source: ../demo
-        target: /app
+        target: /app:cached
     ports:
       - 8080:8080
     depends_on: # 依存するコンテナ指定しそれが起動してから動作するようにする
